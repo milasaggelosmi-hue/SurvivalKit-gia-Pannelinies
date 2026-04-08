@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4a90e2">
+    <title>Πανελλαδικές - Θεωρητική Κατεύθυνση</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon.png">
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="container glass-panel">
+        <!-- New: Mode Selection Screen -->
+        <section id="mode-selection" class="screen active">
+            <header>
+                <h1 class="logo-title">Quiz <span class="accent">2025-26</span></h1>
+                <p class="subtitle">Επίλεξε στυλ παιχνιδιού</p>
+            </header>
+            <div class="subject-buttons">
+                <button class="subject-btn mode-btn" data-mode="classic" style="border-color: var(--neon-blue);">
+                    <span class="icon">📝</span>
+                    <span class="text">Classic Quiz</span>
+                </button>
+                <button class="subject-btn mode-btn" data-mode="millionaire" style="border-color: var(--border-gold);">
+                    <span class="icon">💰</span>
+                    <span class="text">Millionaire Mode</span>
+                </button>
+            </div>
+        </section>
+
+        <section id="selection-screen" class="screen hidden">
+            <header>
+                <h1>Κουίζ Προετοιμασίας</h1>
+                <p>Γ' Λυκείου - Ανθρωπιστικές Σπουδές</p>
+                <button id="install-btn" class="install-btn hidden">⬇️ Κατέβασμα (Εγκατάσταση) Εφαρμογής</button>
+            </header>
+
+            <header class="app-header">
+                <h1>Πανελλαδικές | <span class="primary-text">Θεωρητική</span></h1>
+                <p>Επίλεξε κατεύθυνση και κάνε εξάσκηση</p>
+            </header>
+
+            <!-- Mode Selection -->
+            <div style="text-align:center; margin-bottom: 2rem;">
+                <button id="btn-singleplayer" class="primary-btn" style="margin-right: 1rem; width: auto; display: inline-block;">Ατομικό Παιχνίδι</button>
+                <button id="btn-multiplayer" class="primary-btn" style="background: #dc2626; width: auto; display: inline-block;">🔴 Live Multiplayer</button>
+            </div>
+            
+            <div id="singleplayer-wrapper" class="subject-buttons">
+                <button class="subject-btn history" data-subject="history">
+                    <span class="icon">🏛️</span>
+                    <span class="text">Ιστορία</span>
+                </button>
+                <button class="subject-btn ancient" data-subject="ancient">
+                    <span class="icon">📜</span>
+                    <span class="text">Αρχαία Ελληνικά</span>
+                </button>
+                <button class="subject-btn latin" data-subject="latin">
+                    <span class="icon">🦅</span>
+                    <span class="text">Λατινικά</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Multiplayer Login Screen -->
+        <section id="multiplayer-login-screen" class="screen hidden">
+            <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; max-width: 400px; margin: 0 auto;">
+                <h2 style="color: var(--primary-color); margin-bottom: 20px;">Join Live Game</h2>
+                <input type="text" id="live-player-name" placeholder="Το όνομά σου..." style="width: 80%; padding: 15px; font-size: 1.2rem; border-radius: 8px; border: 2px solid var(--border-color); margin-bottom: 20px;">
+                <button id="btn-join-live" class="primary-btn" style="font-size: 1.2rem; padding: 15px 30px;">Σύνδεση</button>
+                <p id="live-status-msg" style="margin-top:20px; color: var(--text-color); font-weight: bold;"></p>
+            </div>
+        </section>
+
+        <!-- Οθόνη Επιλογής Δυσκολίας -->
+        <div id="difficulty-selection" class="screen hidden">
+            <h2 id="diff-subject-title">Μάθημα</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-top: 0.5rem;">Επίλεξε Επίπεδο Δυσκολίας</p>
+            <div class="difficulty-buttons">
+                <button class="diff-btn easy" data-diff="easy">🟢 Εύκολο</button>
+                <button class="diff-btn medium" data-diff="medium">🟡 Μέτριο</button>
+                <button class="diff-btn hard" data-diff="hard">🔴 Δύσκολο</button>
+            </div>
+            <div style="text-align: center;">
+                <button id="back-to-sections" class="secondary-btn hidden">🔙 Πίσω στις ενότητες</button>
+                <button id="back-to-subjects" class="secondary-btn">🔙 Πίσω στα μαθήματα</button>
+            </div>
+        </div>
+
+
+        <!-- History Sections Screen -->
+        <section id="history-sections" class="screen hidden">
+            <h2 style="text-align:center;">Επίλεξε Ενότητα Ιστορίας</h2>
+            <div class="section-buttons">
+                <button class="section-btn" data-section="economy">📈 Οικονομία</button>
+                <button class="section-btn" data-section="political">⚖️ Πολιτικά Κομματα</button>
+                <button class="section-btn" data-section="refugees">🏘️ Προσφυγικό</button>
+                <button class="section-btn" data-section="cretan">⛰️ Κρητικό</button>
+                <button class="section-btn" data-section="pontic">🕊️ Ποντιακό</button>
+                <button class="section-btn" data-section="all" style="grid-column: 1 / -1; background: var(--primary-color); color: white;">🌍 Όλες οι Ενότητες</button>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <button id="back-from-sections" class="secondary-btn">🔙 Πίσω στα μαθήματα</button>
+            </div>
+        </section>
+
+        <!-- Quiz Screen -->
+        <section id="quiz-screen" class="screen hidden">
+            
+            <div id="millionaire-jokers" class="jokers-container hidden" style="display:flex; justify-content:center; gap:10px; margin-bottom: 20px;">
+                <button id="joker-50" class="joker-btn">50:50</button>
+                <button id="joker-audience" class="joker-btn">👤</button>
+                <button id="stop-collect-btn" class="glass-btn hidden" style="margin-top:0; height:60px;">Στάση & Είσπραξη</button>
+            </div>
+
+            <div id="classic-jokers" class="jokers-container" style="display:flex; justify-content:center; gap:10px; margin-bottom: 20px;">
+                <button id="classic-joker-50" class="primary-btn" style="width:auto; padding: 10px 20px; font-size: 1rem; background: #eab308; color: white;">50 : 50</button>
+                <button id="classic-joker-audience" class="primary-btn" style="width:auto; padding: 10px 20px; font-size: 1rem; background: #eab308; color: white;">👤 Κοινό</button>
+            </div>
+
+                <div class="quiz-layout">
+                    <div class="main-quiz-area">
+                        <div class="quiz-header">
+                            <div class="progress-info">
+                                <h2 id="current-subject-title">Μάθημα</h2>
+                                <span id="current-difficulty-badge" class="difficulty-badge">Εύκολο</span>
+                                <div id="millionaire-prize-header" class="current-prize-display hidden">€0</div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress"></div>
+                            </div>
+                            <p class="question-counter">Ερώτηση <span id="current-q">1</span>/<span id="total-q">10</span></p>
+                        </div>
+
+                        <div class="question-container">
+                            <span id="question-category" class="category-badge"></span>
+                            <h3 id="question-text">Κείμενο Ερώτησης...</h3>
+                            <div id="options-container" class="options-grid">
+                                <!-- Οι επιλογές θα προστεθούν εδώ δυναμικά -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Money Ladder Sidebar (Hidden by default) -->
+                    <aside id="money-ladder" class="money-ladder hidden">
+                        <!-- Ladder items will be injected by JS -->
+                    </aside>
+                </div>
+
+            <div id="feedback-container" class="feedback hidden">
+                <div class="feedback-icon" id="feedback-icon"></div>
+                <h4 id="feedback-title">Τίτλος</h4>
+                <div class="feedback-actions" id="feedback-actions" style="display:none; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:1rem;">
+                    <button id="show-excerpt-btn" style="background:#184cc8; color:white; border:2px solid #cfa858; padding:10px 20px; border-radius:50px; cursor:pointer; font-family:inherit; font-size:0.95rem;">📖 Σχολικό Βιβλίο</button>
+                    <button id="show-video-btn" style="background:#dc2626; color:white; border:2px solid #cfa858; padding:10px 20px; border-radius:50px; cursor:pointer; font-family:inherit; font-size:0.95rem;">▶️ Βίντεο Εξήγηση</button>
+                </div>
+                <div id="textbook-excerpt" class="excerpt hidden">
+                    <h5>Απόσπασμα Βιβλίου / Εξήγηση:</h5>
+                    <p id="excerpt-text">Κείμενο...</p>
+                </div>
+                <div id="video-container" class="hidden" style="margin-top:1rem; border-radius:12px; overflow:hidden;">
+                    <iframe id="yt-player" width="100%" height="250" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:12px;"></iframe>
+                </div>
+            </div>
+            <button id="next-btn" class="primary-btn hidden" style="margin-top: 1rem;">Επόμενη Ερώτηση ➡️</button>
+            </div>
+        </section>
+
+        <!-- Οθόνη Αποτελεσμάτων -->
+        <div id="results-screen" class="screen">
+            <h2>Αποτελέσματα</h2>
+            <div class="score-container">
+                <div class="score-circle">
+                    <span id="final-score">0</span>%
+                </div>
+            </div>
+            <p id="score-message">Μήνυμα</p>
+            <div class="results-stats">
+                <p>Σωστές: <span id="correct-count" class="correct-text">0</span></p>
+                <p>Λάθος: <span id="wrong-count" class="wrong-text">0</span></p>
+            </div>
+            
+            <div style="margin: 2rem 0; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                <h3>Αποθήκευση στο Live Leaderboard</h3>
+                <input type="text" id="player-name" placeholder="Το όνομά σου..." style="padding: 0.5rem; width: 80%; max-width: 200px; margin: 1rem 0; border-radius: 4px; border: 1px solid #ccc; font-family: inherit;">
+                <br>
+                <button id="save-score-btn" class="primary-btn" style="background:#28a745;">Υποβολή Σκορ</button>
+                <p id="save-msg" class="hidden" style="color:#28a745; font-weight:bold; margin-top: 10px;">Το σκορ σου αποθηκεύτηκε!</p>
+            </div>
+            
+            <button id="restart-btn" class="primary-btn">Επιστροφή στην Αρχή</button>
+        </div>
+    </div>
+    
+    <!-- Audience Modal -->
+    <div id="audience-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; align-items:center; justify-content:center; background:rgba(0,0,0,0.8); z-index:999; flex-direction:column;">
+        <div style="background: white; width: 90%; max-width:400px; text-align:center; padding: 2rem; border-radius: 12px;">
+            <h2 style="color:var(--primary-color); margin-bottom: 20px;">Η Άποψη του Κοινού</h2>
+            
+            <div id="audience-bars" style="display:flex; justify-content:space-around; align-items:flex-end; height: 150px; margin-bottom: 20px; border-bottom: 2px solid #ccc; padding-bottom: 10px;">
+                <!-- Injected bars via JS -->
+            </div>
+            
+            <button id="close-audience-btn" class="primary-btn">Εντάξει</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDK Compat -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="firebase-config.js"></script>
+    
+    <script src="data.js"></script>
+    <script src="sounds.js"></script>
+    <script src="live.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker Registered'))
+                    .catch(err => console.log('Service Worker Failed', err));
+            });
+        }
+
+        // PWA Install Logic
+        let deferredPrompt;
+        const installBtn = document.getElementById('install-btn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.classList.remove('hidden');
+        });
+
+        installBtn.addEventListener('click', () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
+                    installBtn.classList.add('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

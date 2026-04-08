@@ -1,0 +1,17 @@
+{
+  "name": "Panhellenic Quiz App",
+  "short_name": "Quiz Γ' Λυκείου",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#4a90e2",
+  "description": "Κουίζ προετοιμασίας για μαθητές Γ' Λυκείου - Θεωρητική Κατεύθυνση.",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
